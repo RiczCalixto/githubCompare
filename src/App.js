@@ -10,7 +10,7 @@ import Main from './pages/Main';
 // `;
 
 const App = () => (
-  <Fragment className="App">
+  <Fragment>
     <GlobalStyle />
     <Main />
   </Fragment>
