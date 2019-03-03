@@ -36,24 +36,23 @@ export const Repository = styled.div`
       font-size: 14px;
       color: #666;
     }
+  }
+  ul {
+    list-style: none;
 
-    ul {
-      list-style: none;
+    li {
+      font-weight: bold;
+      padding: 12px 20px;
 
-      li {
-        font-weight: bold;
-        padding: 12px 20px;
+      small {
+        font-weight: normal;
+        font-size: 12px;
+        color: #999;
+        font-style: italic;
+      }
 
-        small {
-          font-weight: normal;
-          font-size: 12px;
-          color: #999;
-          font-style: italic;
-        }
-
-        &:nth-child(2n - 1) {
-          background: #f5f5f5;
-        }
+      &:nth-child(2n - 1) {
+        background: #f5f5f5;
       }
     }
   }

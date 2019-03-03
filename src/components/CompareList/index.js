@@ -2,95 +2,35 @@ import React from 'react';
 
 import { Container, Repository } from './styles';
 
-const CompareList = () => (
+const CompareList = ({ repositories }) => (
   <Container>
-    <Repository>
-      <header>
-        <img src="https://avatars3.githubusercontent.com/u/69631?v=4" alt="" />
-        <strong>React</strong>
-        <email>facebook</email>
+    {repositories.map(repository => (
+      <Repository>
+        <header>
+          <img src={repository.owner.avatar_url} alt={repository.owner.login} />
+          <strong>{repository.name}</strong>
+          <email>{repository.owner.login}</email>
+        </header>
         <ul>
           <li>
-            5555
-            <small>star</small>
+            {repository.stargazers_count}
+            <small> stars</small>
           </li>
           <li>
-            5555
-            <small>forks</small>
+            {repository.forks_count}
+            <small> forks</small>
           </li>
           <li>
-            5555
-            <small>issues</small>
+            {repository.open_issues_count}
+            <small> issues</small>
           </li>
           <li>
-            3 days ago
-            <small>last commit</small>
-          </li>
-          <li>
-            5555
-            <small>star</small>
+            {repository.pushed_at}
+            <small> last commit</small>
           </li>
         </ul>
-      </header>
-    </Repository>
-    <Repository>
-      <header>
-        <img src="https://avatars3.githubusercontent.com/u/69631?v=4" alt="" />
-        <strong>React</strong>
-        <email>facebook</email>
-        <ul>
-          <li>
-            5555
-            <small>star</small>
-          </li>
-          <li>
-            5555
-            <small>forks</small>
-          </li>
-          <li>
-            5555
-            <small>issues</small>
-          </li>
-          <li>
-            3 days ago
-            <small>last commit</small>
-          </li>
-          <li>
-            5555
-            <small>star</small>
-          </li>
-        </ul>
-      </header>
-    </Repository>
-    <Repository>
-      <header>
-        <img src="https://avatars3.githubusercontent.com/u/69631?v=4" alt="" />
-        <strong>React</strong>
-        <email>facebook</email>
-        <ul>
-          <li>
-            5555
-            <small>star</small>
-          </li>
-          <li>
-            5555
-            <small>forks</small>
-          </li>
-          <li>
-            5555
-            <small>issues</small>
-          </li>
-          <li>
-            3 days ago
-            <small>last commit</small>
-          </li>
-          <li>
-            5555
-            <small>star</small>
-          </li>
-        </ul>
-      </header>
-    </Repository>
+      </Repository>
+    ))}
   </Container>
 );
 
