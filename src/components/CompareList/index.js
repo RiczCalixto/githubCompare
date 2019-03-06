@@ -26,7 +26,7 @@ const CompareList = ({ repositories }) => (
             <small> issues</small>
           </li>
           <li>
-            {repository.pushed_at}
+            {repository.lastCommit}
             <small> last commit</small>
           </li>
         </ul>
@@ -35,7 +35,7 @@ const CompareList = ({ repositories }) => (
   </Container>
 );
 
-CompareList.proprTypes = {
+CompareList.propTypes = {
   repositories: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number,

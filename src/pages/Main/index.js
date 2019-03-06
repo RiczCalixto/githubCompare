@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 
 import logo from '../../assets/logo.png';
 import api from '../../services/api';
@@ -8,22 +9,32 @@ import { Container, Form } from './styles';
 
 export default class Main extends Component {
   state = {
+    loading: false,
     repositoryInput: '',
     repositories: [],
+    repositoryError: false,
   };
 
   handleAddRepository = async (e) => {
     e.preventDefault();
+
+    this.setState({ loading: true });
+
     const repo = this.state;
     try {
-      const response = await api.get(`/repos/${repo.repositoryInput}`);
+      const { data: repository } = await api.get(`/repos/${repo.repositoryInput}`);
+
+      repository.lastCommit = moment(repository.pushed_at).fromNow();
 
       this.setState({
         repositoryInput: '',
-        repositories: [...repo.repositories, response.data],
+        repositories: [...repo.repositories, repository],
+        repositoryError: false,
       });
     } catch (err) {
-      console.log(err);
+      this.setState({ repositoryError: true });
+    } finally {
+      this.setState({ loading: false });
     }
   };
 
@@ -33,14 +44,16 @@ export default class Main extends Component {
       <Container>
         <img src={logo} alt="Github Compare" />
 
-        <Form onSubmit={this.handleAddRepository}>
+        <Form withError={repo.repositoryError} onSubmit={this.handleAddRepository}>
           <input
             type="text"
             placeholder="usuário/repositório"
             value={repo.repositoryInput}
             onChange={e => this.setState({ repositoryInput: e.target.value })}
           />
-          <button type="submit">ok</button>
+          <button type="submit">
+            {repo.loading ? <i className="fa fa-spinner fa-pulse" /> : 'OK'}
+          </button>
         </Form>
 
         <CompareList repositories={repo.repositories} />
